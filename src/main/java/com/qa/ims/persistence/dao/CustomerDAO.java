@@ -20,7 +20,7 @@ public class CustomerDAO implements Dao<Customer> {
 
 	@Override
 	public Customer modelFromResultSet(ResultSet resultSet) throws SQLException {
-		Long id = resultSet.getLong("id");
+		Long id = resultSet.getLong("customer_id");
 		String firstName = resultSet.getString("first_name");
 		String surname = resultSet.getString("surname");
 		return new Customer(id, firstName, surname);
@@ -28,7 +28,7 @@ public class CustomerDAO implements Dao<Customer> {
 
 	/**
 	 * Reads all customers from the database
-	 * 
+	 *
 	 * @return A list of customers
 	 */
 	@Override
@@ -63,7 +63,7 @@ public class CustomerDAO implements Dao<Customer> {
 
 	/**
 	 * Creates a customer in the database
-	 * 
+	 *
 	 * @param customer - takes in a customer object. id will be ignored
 	 */
 	@Override
@@ -100,7 +100,7 @@ public class CustomerDAO implements Dao<Customer> {
 
 	/**
 	 * Updates a customer in the database
-	 * 
+	 *
 	 * @param customer - takes in a customer object, the id field will be used to
 	 *                 update that customer in the database
 	 * @return
@@ -124,7 +124,7 @@ public class CustomerDAO implements Dao<Customer> {
 
 	/**
 	 * Deletes a customer in the database
-	 * 
+	 *
 	 * @param id - id of the customer
 	 */
 	@Override
