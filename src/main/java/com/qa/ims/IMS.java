@@ -1,11 +1,11 @@
 package com.qa.ims;
 
+import com.qa.ims.controller.*;
+import com.qa.ims.persistence.dao.OrderDAO;
+import com.qa.ims.persistence.dao.ProductDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.qa.ims.controller.Action;
-import com.qa.ims.controller.CrudController;
-import com.qa.ims.controller.CustomerController;
 import com.qa.ims.persistence.dao.CustomerDAO;
 import com.qa.ims.persistence.domain.Domain;
 import com.qa.ims.utils.DBUtils;
@@ -16,6 +16,8 @@ public class IMS {
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	private final CustomerController customers;
+	private final ProductController products;
+	private final OrderController orders;
 
 
 	private final Utils utils;
@@ -24,15 +26,21 @@ public class IMS {
 		this.utils = new Utils();
 		final CustomerDAO custDAO = new CustomerDAO();
 		this.customers = new CustomerController(custDAO, utils);
+
+		final ProductDAO prodDAO = new ProductDAO();
+		this.products = new ProductController(prodDAO, utils);
+
+		final OrderDAO orderDAO = new OrderDAO();
+		this.orders = new OrderController(orderDAO, utils);
 	}
 
 	public void imsSystem() {
-		LOGGER.info("Welcome to the Inventory Management System!");
+		LOGGER.info("Welcome to the IMS for All Slabbed Out here you can find a great range of really interesting slabs in all styles and sizes!\n");
 		DBUtils.connect();
 
 		Domain domain = null;
 		do {
-			LOGGER.info("Which entity would you like to use?");
+			LOGGER.info("Which of the following entities would you like to interact with? Please type the entity to select it.\n");
 			Domain.printDomains();
 
 			domain = Domain.getDomain(utils);
@@ -51,9 +59,11 @@ public class IMS {
 			case CUSTOMER:
 				active = this.customers;
 				break;
-			case ITEM:
+			case PRODUCT:
+				active = this.products;
 				break;
 			case ORDER:
+				active = this.orders;
 				break;
 			case STOP:
 				return;
@@ -61,7 +71,7 @@ public class IMS {
 				break;
 			}
 
-			LOGGER.info(() ->"What would you like to do with " + domain.name().toLowerCase() + ":");
+			LOGGER.info(() ->"What would you like to do with " + domain.name().toLowerCase() + ": ");
 
 			Action.printActions();
 			Action action = Action.getAction(utils);

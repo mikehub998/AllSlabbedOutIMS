@@ -1,15 +1,12 @@
 package com.qa.ims.controller;
 
-import java.util.List;
-
 import com.qa.ims.persistence.dao.ProductDAO;
 import com.qa.ims.persistence.domain.Product;
+import com.qa.ims.utils.Utils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.qa.ims.persistence.dao.CustomerDAO;
-import com.qa.ims.persistence.domain.Customer;
-import com.qa.ims.utils.Utils;
+import java.util.List;
 
 /**
  * Takes in product details for CRUD functionality
@@ -38,21 +35,23 @@ public class ProductController implements CrudController<Product> {
             LOGGER.info(product);
         }
         return products;
+
     }
 
+
     /**
-     * Creates a product from in user input
+     * Creates a product from user input
      */
     @Override
     public Product create() {
-        LOGGER.info("Please enter which product you wish to create");
+        LOGGER.info("Please enter which product you wish to create:");
         String productName = utils.getString();
-        LOGGER.info("Please enter the amount needed in stock");
+        LOGGER.info("Please enter the amount needed in stock:");
         Long stockQuantity = utils.getLong();
-        LOGGER.info("Please enter the price of the unit");
-        double price = utils.getDouble();
+        LOGGER.info("Please enter the price of the unit:");
+        Long price = utils.getLong();
         Product product = productDAO.create(new Product(productName, stockQuantity, price));
-        LOGGER.info("Product created");
+        LOGGER.info("Product created:");
         return product;
     }
 
@@ -61,29 +60,29 @@ public class ProductController implements CrudController<Product> {
      */
     @Override
     public Product update() {
-        LOGGER.info("Please enter the product id of the product that requires updating");
+        LOGGER.info("Please enter the product id of the product that requires updating:");
         Long productId = utils.getLong();
-        LOGGER.info("Please enter the product name");
+        LOGGER.info("Please enter the product name:");
         String productName = utils.getString();
-        LOGGER.info("Please enter the required stock quantity");
+        LOGGER.info("Please enter the required stock quantity:");
         Long stockQuantity = utils.getLong();
-        LOGGER.info("Please enter price of the unit");
-        double price = utils.getDouble();
+        LOGGER.info("Please enter price of the unit:");
+        Long price = utils.getLong();
         Product product = productDAO.update(new Product(productId, productName, stockQuantity, price));
-        LOGGER.info("Product Updated");
+        LOGGER.info("Product Updated:");
         return product;
     }
 
     /**
-     * Deletes an existing product by the product id
+     * Deletes an existing product by the product_id
      *
      * @return
      */
     @Override
     public int delete() {
-        LOGGER.info("Please enter the id of the product you would like to delete");
-        Long id = utils.getLong();
-        return productDAO.delete(id);
+        LOGGER.info("Please enter the id of the product you would like to delete:");
+        Long productId = utils.getLong();
+        return productDAO.delete(productId);
     }
 
 }

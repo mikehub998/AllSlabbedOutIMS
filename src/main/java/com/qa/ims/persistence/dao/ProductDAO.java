@@ -1,12 +1,4 @@
-//package com.qa.ims.persistence.dao;
-//
-//import com.qa.ims.persistence.domain.Product;
-//
-//import java.util.logging.LogManager;
-//
-//public class ProductDAO implements Dao<Product> {
-//    public static final Logger Logger = LogManager.getlogger();
-//}
+
 package com.qa.ims.persistence.dao;
 
 import com.qa.ims.persistence.domain.Product;
@@ -27,7 +19,7 @@ public class ProductDAO implements Dao<Product> {
         Long productId = resultSet.getLong("product_id");
         String productName = resultSet.getString("product_name");
         Long stockQuantity = resultSet.getLong("stock_quantity");
-        double price = resultSet.getDouble("price");
+        Long price = resultSet.getLong("price");
         return new Product(productId, productName, stockQuantity, price);
     }
 
@@ -40,7 +32,7 @@ public class ProductDAO implements Dao<Product> {
     public List<Product> readAll() {
         try (Connection connection = DBUtils.getInstance().getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM products");) {
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM all_slabbed_out_db.products");) {
             List<Product> products = new ArrayList<>();
             while (resultSet.next()) {
                 products.add(modelFromResultSet(resultSet));
@@ -56,7 +48,7 @@ public class ProductDAO implements Dao<Product> {
     public Product readLatest() {
         try (Connection connection = DBUtils.getInstance().getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM products ORDER BY id DESC LIMIT 1");) {
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM all_slabbed_out_db.products ORDER BY product_id DESC LIMIT 1");) {
             resultSet.next();
             return modelFromResultSet(resultSet);
         } catch (Exception e) {
@@ -69,13 +61,13 @@ public class ProductDAO implements Dao<Product> {
     /**
      * Creates an item within the database
      *
-     * @param product - takes in a customer object. id will be ignored
+     * @param product - takes in a product object. product_id will be ignored
      */
     @Override
     public Product create(Product product) {
         try (Connection connection = DBUtils.getInstance().getConnection();
              PreparedStatement statement = connection
-                     .prepareStatement("INSERT INTO products(product_name, stock_quantity, price) VALUES (?, ?, ?)");) {
+                     .prepareStatement("INSERT INTO all_slabbed_out_db.products(product_name, stock_quantity, price) VALUES (?, ?, ?)");) {
             statement.setString(1, product.getProductName());
             statement.setLong(2, product.getStockQuantity());
             statement.setDouble(3, product.getPrice());
@@ -89,10 +81,10 @@ public class ProductDAO implements Dao<Product> {
     }
 
     @Override
-    public Product read(Long id) {
+    public Product read(Long productID) {
         try (Connection connection = DBUtils.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM customers WHERE product_id = ?");) {
-            statement.setLong(1, id);
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM all_slabbed_out_db.products WHERE product_id = ?");) {
+            statement.setLong(1, productID);
             try (ResultSet resultSet = statement.executeQuery();) {
                 resultSet.next();
                 return modelFromResultSet(resultSet);
@@ -115,11 +107,11 @@ public class ProductDAO implements Dao<Product> {
     public Product update(Product product) {
         try (Connection connection = DBUtils.getInstance().getConnection();
              PreparedStatement statement = connection
-                     .prepareStatement("UPDATE customers SET product_name = ?, stock_Quantity = ?, price = ?, WHERE product_id = ?");) {
+                     .prepareStatement("UPDATE all_slabbed_out_db.products SET product_name = ?, stock_Quantity = ?, price = ?, WHERE product_id = ?");) {
             statement.setString(1, product.getProductName());
             statement.setLong(2, product.getStockQuantity());
-            statement.setDouble(2, product.getStockQuantity());
-            statement.setLong(3, product.getProductId());
+            statement.setDouble(3, product.getPrice());
+            statement.setLong(4, product.getProductId());
             statement.executeUpdate();
             return read(product.getProductId());
         } catch (Exception e) {
@@ -132,12 +124,12 @@ public class ProductDAO implements Dao<Product> {
     /**
      * Deletes a product in the database
      *
-     * @param productId - id of the customer
+     * @param productId - product_id of the product
      */
     @Override
     public int delete(long productId) {
         try (Connection connection = DBUtils.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM customers WHERE product_id = ?");) {
+             PreparedStatement statement = connection.prepareStatement("DELETE FROM all_slabbed_out_db.products WHERE product_id = ?");) {
             statement.setLong(1, productId);
             return statement.executeUpdate();
         } catch (Exception e) {

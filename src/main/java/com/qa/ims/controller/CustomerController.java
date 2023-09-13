@@ -43,41 +43,41 @@ public class CustomerController implements CrudController<Customer> {
 	 */
 	@Override
 	public Customer create() {
-		LOGGER.info("Please enter a first name");
+		LOGGER.info("Please enter a first name:");
 		String firstName = utils.getString();
-		LOGGER.info("Please enter a surname");
+		LOGGER.info("Please enter a surname:");
 		String surname = utils.getString();
 		Customer customer = customerDAO.create(new Customer(firstName, surname));
-		LOGGER.info("Customer created");
+		LOGGER.info("Customer created:");
 		return customer;
 	}
 
 	/**
-	 * Updates an existing customer by taking in user input
+	 * Updates an existing customer by taking user input
 	 */
 	@Override
 	public Customer update() {
 		LOGGER.info("Please enter the id of the customer you would like to update");
-		Long id = utils.getLong();
-		LOGGER.info("Please enter a first name");
+		Long customerId = utils.getLong();
+		LOGGER.info("Please enter a first name:");
 		String firstName = utils.getString();
-		LOGGER.info("Please enter a surname");
+		LOGGER.info("Please enter a surname:");
 		String surname = utils.getString();
-		Customer customer = customerDAO.update(new Customer(id, firstName, surname));
-		LOGGER.info("Customer Updated");
+		Customer customer = customerDAO.update(new Customer(customerId, firstName, surname));
+		LOGGER.info("Customer Updated:");
 		return customer;
 	}
 
 	/**
-	 * Deletes an existing customer by the id of the customer
+	 * Deletes an existing customer by the customer_id of the customer
 	 * 
 	 * @return
 	 */
 	@Override
 	public int delete() {
 		LOGGER.info("Please enter the id of the customer you would like to delete");
-		Long id = utils.getLong();
-		return customerDAO.delete(id);
+		Long customerId = utils.getLong();
+		return customerDAO.delete(customerId);
 	}
 
 }

@@ -4,15 +4,15 @@ public class Product {
     private Long productId;
     private String productName;
     private Long stockQuantity;
-    private double price;
+    private Long price;
 
-    public Product(String productName, Long stockQuantity, double price) {
+    public Product(String productName, Long stockQuantity, Long price) {
         this.productName = productName;
         this.stockQuantity = stockQuantity;
         this.price = price;
     }
 
-    public Product(Long productId, String productName, Long stockQuantity, double price) {
+    public Product(Long productId, String productName, Long stockQuantity, Long price) {
         this.productId = productId;
         this.productName = productName;
         this.stockQuantity = stockQuantity;
@@ -47,13 +47,13 @@ public class Product {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
     @Override
     public String toString() {
-        return "product id:" + productId + " product name" + productName + " stock quantity" + stockQuantity + " price" + price;
+        return "product id: " + productId + " product name: " + productName + " stock quantity: " + stockQuantity + " price: " + price;
     }
 
     @Override
@@ -63,6 +63,7 @@ public class Product {
         result = prime * result + ((productName == null) ? 0 : productName.hashCode());
         result = prime * result + ((productId == null) ? 0 : productId.hashCode());
         result = prime * result + ((stockQuantity == null) ? 0 : stockQuantity.hashCode());
+        result = prime * result + ((price == null) ? 0 : price.hashCode());
         return result;
     }
 
@@ -89,6 +90,11 @@ public class Product {
             if (other.stockQuantity != null)
                 return false;
         } else if (!stockQuantity.equals(other.stockQuantity))
+            return false;
+        if (price == null) {
+            if(other.price != null)
+                return false;
+        } else if (!price.equals(other.price))
             return false;
         return true;
     }

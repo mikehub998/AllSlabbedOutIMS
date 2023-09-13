@@ -72,15 +72,15 @@ public class CustomerControllerTest {
 
 	@Test
 	public void testDelete() {
-		final long ID = 1L;
+		final long customerId = 1L;
 
-		Mockito.when(utils.getLong()).thenReturn(ID);
-		Mockito.when(dao.delete(ID)).thenReturn(1);
+		Mockito.when(utils.getLong()).thenReturn(customerId);
+		Mockito.when(dao.delete(customerId)).thenReturn(1);
 
 		assertEquals(1L, this.controller.delete());
 
 		Mockito.verify(utils, Mockito.times(1)).getLong();
-		Mockito.verify(dao, Mockito.times(1)).delete(ID);
+		Mockito.verify(dao, Mockito.times(1)).delete(customerId);
 	}
 
 }
