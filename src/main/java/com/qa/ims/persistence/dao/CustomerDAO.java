@@ -35,7 +35,7 @@ public class CustomerDAO implements Dao<Customer> {
 	public List<Customer> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM all_slabbed_out_db.customers");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM customers");) {
 			List<Customer> customers = new ArrayList<>();
 			while (resultSet.next()) {
 				customers.add(modelFromResultSet(resultSet));

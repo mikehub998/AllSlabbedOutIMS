@@ -43,7 +43,7 @@ public class Product {
         this.stockQuantity = stockQuantity;
     }
 
-    public double getPrice() {
+    public Long getPrice() {
         return price;
     }
 
