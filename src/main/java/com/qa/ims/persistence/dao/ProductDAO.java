@@ -19,7 +19,7 @@ public class ProductDAO implements Dao<Product> {
         Long productId = resultSet.getLong("product_id");
         String productName = resultSet.getString("product_name");
         Long stockQuantity = resultSet.getLong("stock_quantity");
-        Long price = resultSet.getLong("price");
+        Double price = resultSet.getDouble("price");
         return new Product(productId, productName, stockQuantity, price);
     }
 
@@ -107,7 +107,7 @@ public class ProductDAO implements Dao<Product> {
     public Product update(Product product) {
         try (Connection connection = DBUtils.getInstance().getConnection();
              PreparedStatement statement = connection
-                     .prepareStatement("UPDATE all_slabbed_out_db.products SET product_name = ?, stock_Quantity = ?, price = ?, WHERE product_id = ?");) {
+                     .prepareStatement("UPDATE all_slabbed_out_db.products SET product_name = ?, stock_Quantity = ?, price = ? WHERE product_id = ?");) {
             statement.setString(1, product.getProductName());
             statement.setLong(2, product.getStockQuantity());
             statement.setDouble(3, product.getPrice());

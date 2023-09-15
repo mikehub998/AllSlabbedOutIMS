@@ -8,6 +8,7 @@ import com.qa.ims.utils.Utils;
 public enum Domain {
 
 	CUSTOMER("Shows information about customers"), PRODUCT("View individual Products"), ORDER("View orders and purchases of items"),
+	ORDERLINE("Selection to relate to the orderline of an order"),
 	STOP("Exit the application");
 
 	public static final Logger LOGGER = LogManager.getLogger();

@@ -2,6 +2,7 @@ package com.qa.ims;
 
 import com.qa.ims.controller.*;
 import com.qa.ims.persistence.dao.OrderDAO;
+import com.qa.ims.persistence.dao.OrderlineDAO;
 import com.qa.ims.persistence.dao.ProductDAO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,6 +19,7 @@ public class IMS {
 	private final CustomerController customers;
 	private final ProductController products;
 	private final OrderController orders;
+	private final OrderlineController orderlines;
 
 
 	private final Utils utils;
@@ -32,6 +34,9 @@ public class IMS {
 
 		final OrderDAO orderDAO = new OrderDAO();
 		this.orders = new OrderController(orderDAO, utils);
+
+		final OrderlineDAO orderlineDAO = new OrderlineDAO();
+		this.orderlines = new OrderlineController(orderlineDAO, utils);
 	}
 
 	public void imsSystem() {
@@ -65,10 +70,13 @@ public class IMS {
 			case ORDER:
 				active = this.orders;
 				break;
-			case STOP:
-				return;
-			default:
+			case ORDERLINE:
+				active = this.orderlines;
 				break;
+				case STOP:
+					return;
+				default:
+					break;
 			}
 
 			LOGGER.info(() ->"What would you like to do with " + domain.name().toLowerCase() + ": ");

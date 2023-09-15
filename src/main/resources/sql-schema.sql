@@ -31,11 +31,11 @@ CREATE TABLE IF NOT EXISTS `all_slabbed_out_db`.`orders` (
     );
 
 
-CREATE TABLE IF NOT EXISTS `all_slabbed_out_db`.`orders_products` (
-	`order_product_id` INT(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `all_slabbed_out_db`.`orderlines` (
+	`orderline_id` INT(20) NOT NULL AUTO_INCREMENT,
     `product_id` INT(20),
     `amount` INT(5),
-    `ordit_total` DEC(6,2),
+    `orderline_total` DEC(6,2),
     PRIMARY KEY (`order_product_id`),
     FOREIGN KEY (`product_id`) REFERENCES products(`product_id`)
     );

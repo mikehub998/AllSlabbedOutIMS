@@ -1,30 +1,30 @@
 package com.qa.ims.persistence.domain;
 
-public class OrderProduct {
-    private Long orderProductId;
+public class Orderline {
+    private Long orderlineId;
     private Long productId;
     private float amount;
-    private double orderProductTotal;
+    private double orderlineTotal;
 
-    public OrderProduct(Long productId, float amount, double orderProductTotal) {
+    public Orderline(Long productId, float amount, double orderProductTotal) {
         this.productId = productId;
         this.amount = amount;
-        this.orderProductTotal = orderProductTotal;
+        this.orderlineTotal = orderlineTotal;
     }
 
-    public OrderProduct(Long orderProductId, Long productId, float amount, double orderProductTotal) {
-        this.orderProductId = orderProductId;
+    public Orderline(Long orderlineId, Long productId, float amount, double orderlineTotal) {
+        this.orderlineId = orderlineId;
         this.productId = productId;
         this.amount = amount;
-        this.orderProductTotal = orderProductTotal;
+        this.orderlineTotal = orderlineTotal;
     }
 
-    public Long getOrderProductId() {
-        return orderProductId;
+    public Long getOrderlineId() {
+        return orderlineId;
     }
 
-    public void setOrderProductId(Long orderProductId) {
-        this.orderProductId = orderProductId;
+    public void setOrderlineId(Long orderlineId) {
+        this.orderlineId = orderlineId;
     }
 
     public Long getProductId() {
@@ -43,20 +43,20 @@ public class OrderProduct {
         this.amount = amount;
     }
 
-    public double getOrderProductTotal() { return orderProductTotal; }
+    public double getOrderlineTotal() { return orderlineTotal; }
 
-    public void setOrderProductTotal(double orderProductTotal) { this.orderProductTotal = orderProductTotal; }
+    public void setOrderlineTotal(double orderlineTotal) { this.orderlineTotal = orderlineTotal; }
 
     @Override
     public String toString() {
-        return "order product id: " + orderProductId + " product ID: " + productId + " amount of order: " + amount + " total of order and product:" + orderProductTotal;
+        return "orderline id: " + orderlineId + " product ID: " + productId + " amount of order: " + amount + " total of orderline:" + orderlineTotal;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((orderProductId == null) ? 0 : orderProductId.hashCode());
+        result = prime * result + ((orderlineId == null) ? 0 : orderlineId.hashCode());
         result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 
         return result;
@@ -70,11 +70,11 @@ public class OrderProduct {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        OrderProduct other = (OrderProduct) obj;
-                if (orderProductId == null) {
-            if (other.orderProductId != null)
+        Orderline other = (Orderline) obj;
+                if (orderlineId == null) {
+            if (other.orderlineId != null)
                 return false;
-        } else if (!orderProductId.equals(other.orderProductId))
+        } else if (!orderlineId.equals(other.orderlineId))
             return false;
         if (productId == null) {
             if (other.productId != null)

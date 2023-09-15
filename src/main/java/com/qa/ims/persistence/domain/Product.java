@@ -4,15 +4,15 @@ public class Product {
     private Long productId;
     private String productName;
     private Long stockQuantity;
-    private Long price;
+    private Double price;
 
-    public Product(String productName, Long stockQuantity, Long price) {
+    public Product(String productName, Long stockQuantity, Double price) {
         this.productName = productName;
         this.stockQuantity = stockQuantity;
         this.price = price;
     }
 
-    public Product(Long productId, String productName, Long stockQuantity, Long price) {
+    public Product(Long productId, String productName, Long stockQuantity, Double price) {
         this.productId = productId;
         this.productName = productName;
         this.stockQuantity = stockQuantity;
@@ -43,11 +43,11 @@ public class Product {
         this.stockQuantity = stockQuantity;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
