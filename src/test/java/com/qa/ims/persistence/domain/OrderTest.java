@@ -1,6 +1,5 @@
 package com.qa.ims.persistence.domain;
 
-import com.qa.ims.persistence.domain.Customer;
 import org.junit.Test;
 
 import nl.jqno.equalsverifier.EqualsVerifier;

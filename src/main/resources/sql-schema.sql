@@ -19,23 +19,23 @@ CREATE TABLE If NOT EXISTS `all_slabbed_out_db`.`products` (
     PRIMARY KEY (`product_id`)
     );
 
-CREATE TABLE IF NOT EXISTS `all_slabbed_out_db`.`orders` (
-    `order_id` INT(20) NOT NULL AUTO_INCREMENT,
-    `customer_id` INT(20) NOT NULL,
-    `product_id` INT(20) NOT NULL,
-    `date_placed` date NOT NULL,
-    `order_total` DEC(6,2) NOT NULL,
-    PRIMARY KEY (`order_id`),
-    FOREIGN KEY (`customer_id`) REFERENCES customers(`customer_id`),
-    FOREIGN KEY (`product_id`) REFERENCES products(`product_id`)
-    );
-
-
 CREATE TABLE IF NOT EXISTS `all_slabbed_out_db`.`orderlines` (
 	`orderline_id` INT(20) NOT NULL AUTO_INCREMENT,
     `product_id` INT(20),
     `amount` INT(5),
     `orderline_total` DEC(6,2),
-    PRIMARY KEY (`order_product_id`),
+    PRIMARY KEY (`orderline_id`),
     FOREIGN KEY (`product_id`) REFERENCES products(`product_id`)
+    );
+
+
+CREATE TABLE IF NOT EXISTS `all_slabbed_out_db`.`orders` (
+    `order_id` INT(20) NOT NULL AUTO_INCREMENT,
+    `orderline_id` INT(20) NOT NULL,
+    `customer_id` INT(20) NOT NULL,
+    `date_placed` date NOT NULL,
+    `order_total` DEC(6,2) NOT NULL,
+    PRIMARY KEY (`order_id`),
+    FOREIGN KEY (`orderline_id`) REFERENCES orderlines(`orderline_id`) ON DELETE CASCADE
+    -- FOREIGN KEY (`product_id`) REFERENCES products(`product_id`)
     );

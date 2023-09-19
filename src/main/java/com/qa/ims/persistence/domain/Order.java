@@ -2,22 +2,22 @@ package com.qa.ims.persistence.domain;
 
 public class Order {
     private Long orderId;
+    private Long orderlineId;
     private Long customerId;
-    private Long productId;
     private String datePlaced;
-    private Long orderTotal;
+    private Double orderTotal;
 
-    public Order(Long customerId, Long productId, String datePlaced, Long orderTotal) {
+    public Order(Long orderlineId, Long customerId, String datePlaced, Double orderTotal) {
+        this.orderlineId = orderlineId;
         this.customerId = customerId;
-        this.productId = productId;
         this.datePlaced = datePlaced;
         this.orderTotal = orderTotal;
     }
 
-    public Order(Long orderId, Long customerId, Long productId, String datePlaced, Long orderTotal) {
+    public Order(Long orderId, Long orderlineId, Long customerId, String datePlaced, Double orderTotal) {
         this.orderId = orderId;
+        this.orderlineId = orderlineId;
         this.customerId = customerId;
-        this.productId = productId;
         this.datePlaced = datePlaced;
         this.orderTotal = orderTotal;
     }
@@ -30,6 +30,10 @@ public class Order {
         this.orderId = orderId;
     }
 
+    public Long getOrderlineId() { return orderlineId; }
+
+    public void setOrderlineId(Long orderlineId) { this.orderlineId = orderlineId; }
+
     public Long getCustomerId() {
         return customerId;
     }
@@ -38,13 +42,6 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
 
     public String getDatePlaced() {
         return datePlaced;
@@ -54,13 +51,13 @@ public class Order {
         this.datePlaced = datePlaced;
     }
 
-    public Long getOrderTotal() { return orderTotal; }
+    public Double getOrderTotal() { return orderTotal; }
 
-    public void setOrderTotal(Long orderTotal) { this.orderTotal = orderTotal; }
+    public void setOrderTotal(Double orderTotal) { this.orderTotal = orderTotal; }
 
     @Override
     public String toString() {
-        return "order id: " + orderId + " customer ID: " + customerId + " product ID: " + productId + " date of order: " + datePlaced + " total of order:" + orderTotal;
+        return "order id: " + orderId + " orderline ID: " + orderlineId + " customer ID: " + customerId  + " date of order: " + datePlaced + " total of order:" + orderTotal;
     }
 
     @Override
@@ -68,8 +65,8 @@ public class Order {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
+        result = prime * result + ((orderlineId == null) ? 0 : orderlineId.hashCode());
         result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
-        result = prime * result + ((productId == null) ? 0 : productId.hashCode());
         result = prime * result + ((datePlaced == null) ? 0 : datePlaced.hashCode());
         result = prime * result + ((orderTotal == null) ? 0 : orderTotal.hashCode());
 
@@ -90,15 +87,15 @@ public class Order {
                 return false;
         } else if (!getCustomerId().equals(other.getCustomerId()))
             return false;
+        if (orderlineId == null) {
+            if (other.orderlineId != null)
+                return false;
+        } else if (!orderlineId.equals(other.orderlineId))
+            return false;
         if (orderId == null) {
             if (other.orderId != null)
                 return false;
         } else if (!orderId.equals(other.orderId))
-            return false;
-        if (productId == null) {
-            if (other.productId != null)
-                return false;
-        } else if (!productId.equals(other.productId))
             return false;
         if (datePlaced == null) {
             if(other.datePlaced != null)
